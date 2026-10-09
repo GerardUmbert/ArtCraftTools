@@ -1,0 +1,99 @@
+{
+  "owner": "GerardUmbert",
+  "repo": "ArtCraftTools",
+  "upstream_owner": "storytold",
+  "container_port": 8080,
+  "apps": [
+    {
+      "name": "photocraft",
+      "port": 8181,
+      "replaces": "Adobe Photoshop",
+      "title": "PhotoCraft",
+      "category": "Productivity: Tools",
+      "tagline": "The open-source image editor you already know how to use."
+    },
+    {
+      "name": "wordcraft",
+      "port": 8182,
+      "replaces": "Microsoft Word",
+      "title": "WordCraft",
+      "category": "Productivity: Tools"
+    },
+    {
+      "name": "gridcraft",
+      "port": 8183,
+      "replaces": "Microsoft Excel",
+      "title": "GridCraft",
+      "category": "Productivity: Tools"
+    },
+    {
+      "name": "deckcraft",
+      "port": 8184,
+      "replaces": "Microsoft PowerPoint",
+      "title": "DeckCraft",
+      "category": "Productivity: Tools"
+    },
+    {
+      "name": "lightcraft",
+      "port": 8185,
+      "replaces": "Adobe Lightroom",
+      "title": "LightCraft",
+      "category": "Productivity: Tools",
+      "tagline": "An open-source photo library and raw developer that runs on your machine."
+    },
+    {
+      "name": "vectorcraft",
+      "port": 8186,
+      "replaces": "Adobe Illustrator",
+      "title": "VectorCraft",
+      "category": "Productivity: Tools",
+      "tagline": "Fast, open-source vector illustration, reimagined in pure Rust."
+    },
+    {
+      "name": "designcraft",
+      "port": 8187,
+      "replaces": "Adobe InDesign",
+      "title": "DesignCraft",
+      "category": "Productivity: Tools",
+      "tagline": "Open-source page layout and publishing, rebuilt in pure Rust."
+    },
+    {
+      "name": "pdfcraft",
+      "port": 8188,
+      "replaces": "Adobe Acrobat",
+      "title": "PdfCraft",
+      "category": "Productivity: Tools",
+      "tagline": "The open-source PDF workbench: read, organize, combine, split and secure."
+    },
+    {
+      "name": "filmcraft",
+      "port": 8189,
+      "replaces": "Adobe Premiere Pro",
+      "title": "FilmCraft",
+      "category": "MediaApp:Video",
+      "tagline": "Professional, open-source video editing, rebuilt from scratch in Rust."
+    },
+    {
+      "name": "effectcraft",
+      "port": 8190,
+      "replaces": "Adobe After Effects",
+      "title": "EffectCraft",
+      "category": "MediaApp:Video",
+      "tagline": "Open-source motion graphics and visual effects, built in pure Rust."
+    },
+    {
+      "name": "soundcraft",
+      "port": 8191,
+      "replaces": "Avid Pro Tools",
+      "title": "SoundCraft",
+      "category": "MediaApp:Music"
+    },
+    {
+      "name": "cadcraft",
+      "port": 8192,
+      "replaces": "AutoCAD",
+      "title": "CADCraft",
+      "category": "Productivity: Tools"
+    }
+  ]
+}
