@@ -46,4 +46,6 @@ getartcraft.com publishes icons only for PhotoCraft, VectorCraft, FilmCraft, Lig
 
 ## Licensing
 
+This packaging repo is AGPL-3.0 (see `LICENSE`).
+
 The upstream apps are MIT or Apache-2.0; the ArtCraft name and logos are trademarks with separate brand terms. Check them before submitting to Community Applications.
