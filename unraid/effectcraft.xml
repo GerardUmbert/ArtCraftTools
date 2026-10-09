@@ -17,4 +17,5 @@
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <DateInstalled/>
   <Config Name="WebUI Port" Target="8080" Default="8190" Mode="tcp" Description="Host port for the web UI (container port 8080). Unique per app, see PORTS.md." Type="Port" Display="always" Required="true" Mask="false">8190</Config>
+  <Config Name="Appdata (Tailscale state only)" Target="/config" Default="/mnt/user/appdata/effectcraft" Mode="rw" Description="Not used by the app (documents stay in your browser). Only gives the Unraid Tailscale hook a persistent folder for its state; safe to ignore if you do not use Tailscale." Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/effectcraft</Config>
 </Container>

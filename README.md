@@ -39,6 +39,7 @@ WebGPU and clipboard need a secure context, so plain `http://<lan-ip>:818x` won'
 
 - In the container's Edit page on Unraid 7+, turn on **Use Tailscale** and give it a hostname (e.g. `photocraft`). Enable **Tailscale Serve** so it's reachable over HTTPS at `https://photocraft.<tailnet>.ts.net`. Each container gets its own tailnet identity, so port numbers don't clash there.
 - The LAN host ports (8181 to 8192) are unique per app, so everything also coexists on the LAN.
+- Each template has an optional "Appdata (Tailscale state only)" path (`/config`) so the Unraid Tailscale hook finds a persistent folder. The app itself stores nothing there.
 - Alternative: one reverse proxy (SWAG, NPM, Caddy) with HTTPS in front of the host ports.
 
 ## Maintaining

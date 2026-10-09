@@ -29,6 +29,7 @@ TEMPLATE = """<?xml version="1.0"?>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <DateInstalled/>
   <Config Name="WebUI Port" Target="{cport}" Default="{port}" Mode="tcp" Description="Host port for the web UI (container port {cport}). Unique per app, see PORTS.md." Type="Port" Display="always" Required="true" Mask="false">{port}</Config>
+  <Config Name="Appdata (Tailscale state only)" Target="/config" Default="/mnt/user/appdata/{name}" Mode="rw" Description="Not used by the app (documents stay in your browser). Only gives the Unraid Tailscale hook a persistent folder for its state; safe to ignore if you do not use Tailscale." Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/{name}</Config>
 </Container>
 """
 
