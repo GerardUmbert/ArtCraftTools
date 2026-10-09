@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>artcraft-aio</Name>
+  <Repository>ghcr.io/gerardumbert/artcraft-aio:latest</Repository>
+  <Registry>https://github.com/GerardUmbert/ArtCraftTools/pkgs/container/artcraft-aio</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/GerardUmbert/ArtCraftTools/issues</Support>
+  <Project>https://github.com/storytold/artcraft</Project>
+  <Overview>ArtCraft apps (all-in-one) bundles the browser builds of the ArtCraft Crafting Apps, open-source clean-room reimplementations of Photoshop, Word, Excel, PowerPoint, Lightroom, Illustrator, InDesign, Acrobat, Premiere Pro, After Effects, Pro Tools and AutoCAD in Rust. Open the landing page and pick an app (served at /photocraft/, /wordcraft/, ...).  This container serves its browser (WebAssembly) build with nginx. All work happens in your browser: Open/Save use the browser file picker and downloads, so nothing is stored on the server and no volume is needed. WebGPU and clipboard APIs require a secure context, so reach it over HTTPS (for example via Unraid's Tailscale integration with Tailscale Serve, or a reverse proxy) or via localhost. Early alpha software.</Overview>
+  <Category>Productivity: Tools</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/GerardUmbert/ArtCraftTools/main/unraid/artcraft-aio.xml</TemplateURL>
+  <Icon/>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <DateInstalled/>
+  <Config Name="WebUI Port" Target="8080" Default="8180" Mode="tcp" Description="Host port for the web UI (container port 8080). Unique per app, see PORTS.md." Type="Port" Display="always" Required="true" Mask="false">8180</Config>
+</Container>

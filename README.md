@@ -8,12 +8,17 @@ These are early-alpha upstream projects. This repo is unofficial packaging only.
 
 - `unraid/<app>.xml`: Unraid Docker templates, one per app (generated, see below).
 - `Dockerfile`, `nginx.conf`: a thin nginx image that serves the static web build.
+- `Dockerfile.aio`, `nginx-aio.conf`, `aio/`: the all-in-one image and its landing page.
 - `scripts/fetch-web.sh`: downloads the latest `<app>-web-<ver>.zip` from the upstream release.
 - `.github/workflows/build-images.yml`: builds and pushes `ghcr.io/gerardumbert/<app>-web` (daily, picks up new upstream releases).
 - `apps.json`: the single source of truth (app list, host ports, taglines).
 - `scripts/gen_templates.py`: regenerates `unraid/*.xml` and `PORTS.md` from `apps.json`.
 - `PORTS.md`: host port per app.
 - `icons/`: template icons (see "Missing icons").
+
+## All-in-one image
+
+`ghcr.io/gerardumbert/artcraft-aio` (template `unraid/artcraft-aio.xml`, host port 8180) bundles all 12 web builds in one nginx container: a landing page at `/` and each app at `/<app>/` (e.g. `/photocraft/`). One container, one port, one Tailscale hostname. The image is large (~500 MB unpacked) and you can't stop or limit apps individually; use the per-app images if you want that.
 
 ## Nothing is compiled here
 

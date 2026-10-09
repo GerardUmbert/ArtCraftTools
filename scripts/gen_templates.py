@@ -48,3 +48,49 @@ for a in cfg["apps"]:
 ports = "# Port map\n\nOne unique host port per app so they coexist on the LAN. Over Tailscale each container gets its own hostname, so the port is irrelevant there.\n\n| App | Replaces | Host port | Container port | Image |\n|---|---|---|---|---|\n" + "\n".join(rows) + "\n"
 (root / "PORTS.md").write_text(ports, encoding="utf-8", newline="\n")
 print(f'generated {len(cfg["apps"])} templates')
+
+# ---- All-in-one: landing page + template -------------------------------------
+aio_port = cfg["aio_port"]
+cards = "\n".join(
+    f'    <a class="card" href="{a["name"]}/"><img src="icons/{a["name"]}.png" alt="" onerror="this.style.visibility=\'hidden\'">'
+    f'<b>{escape(a["title"])}</b><span>{escape(a["replaces"])} alternative</span></a>'
+    for a in cfg["apps"]
+)
+landing = f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ArtCraft apps</title>
+<style>
+:root{{--bg:#fff;--fg:#1a1a1a;--card:#f3f3f5;--mut:#666}}
+@media (prefers-color-scheme:dark){{:root{{--bg:#16161a;--fg:#eee;--card:#23232a;--mut:#9a9aa5}}}}
+body{{margin:0;padding:24px 16px;background:var(--bg);color:var(--fg);font:16px system-ui,sans-serif}}
+h1{{text-align:center}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;max-width:900px;margin:24px auto}}
+.card{{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 12px;background:var(--card);border-radius:12px;color:inherit;text-decoration:none}}
+.card img{{width:56px;height:56px}} .card span{{color:var(--mut);font-size:13px;text-align:center}}
+</style></head><body>
+<h1>ArtCraft apps</h1>
+<div class="grid">
+{cards}
+</div></body></html>
+"""
+(root / "aio").mkdir(exist_ok=True)
+(root / "aio" / "index.html").write_text(landing, encoding="utf-8", newline="\n")
+
+AIO = TEMPLATE.replace("<Name>{name}</Name>", "<Name>artcraft-aio</Name>")
+aio_xml = AIO.format(
+    name="artcraft-aio", title="ArtCraft apps (all-in-one)", replaces="Photoshop, Word, Excel, PowerPoint, Lightroom, Illustrator, InDesign, Acrobat, Premiere Pro, After Effects, Pro Tools and AutoCAD",
+    category="Productivity: Tools", port=aio_port, cport=cport, owner=owner, owner_l=owner.lower(), repo=repo,
+    upstream=cfg["upstream_owner"], raw=raw, tagline="", icon="<Icon/>",
+)
+aio_xml = aio_xml.replace("<Name>artcraft-aio</Name>", "<Name>artcraft-aio</Name>")
+aio_xml = aio_xml.replace(f"{{raw}}", raw)
+aio_xml = aio_xml.replace(
+    "ghcr.io/%s/artcraft-aio-web" % owner.lower(), "ghcr.io/%s/artcraft-aio" % owner.lower()
+).replace("pkgs/container/artcraft-aio-web", "pkgs/container/artcraft-aio"
+).replace("https://github.com/storytold/artcraft-aio", "https://github.com/storytold/artcraft"
+).replace("is an open-source, clean-room reimplementation of", "bundles the browser builds of the ArtCraft Crafting Apps, open-source clean-room reimplementations of"
+).replace(" in Rust, from the ArtCraft Crafting Apps. ", " in Rust. Open the landing page and pick an app (served at /photocraft/, /wordcraft/, ...). ")
+(root / "unraid" / "artcraft-aio.xml").write_text(aio_xml, encoding="utf-8", newline="\n")
+with open(root / "PORTS.md", "a", encoding="utf-8", newline="\n") as f:
+    f.write(f"\nAll-in-one (`ghcr.io/{owner.lower()}/artcraft-aio`): host port {aio_port}, container port {cport}. Apps at `/<app>/`.\n")
+print("generated aio")

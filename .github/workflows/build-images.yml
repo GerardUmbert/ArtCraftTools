@@ -6,7 +6,7 @@ on:
     - cron: "17 4 * * *"   # daily: pick up new upstream releases
   push:
     branches: [main]
-    paths: [Dockerfile, nginx.conf, scripts/**, apps.json, .github/workflows/build-images.yml]
+    paths: [Dockerfile, Dockerfile.aio, nginx.conf, nginx-aio.conf, aio/**, icons/**, scripts/**, apps.json, .github/workflows/build-images.yml]
 
 permissions:
   contents: read
@@ -62,3 +62,33 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ steps.fetch.outputs.version }}
+
+  aio:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      IMAGE: ghcr.io/gerardumbert/artcraft-aio
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch every upstream web build
+        run: |
+          for app in photocraft wordcraft gridcraft deckcraft lightcraft vectorcraft                      designcraft pdfcraft filmcraft effectcraft soundcraft cadcraft; do
+            DEST="aio-build/$app" bash scripts/fetch-web.sh "$app" | tail -n1 | sed "s/^/$app /"
+          done | tee versions.txt
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.aio
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ env.IMAGE }}:latest

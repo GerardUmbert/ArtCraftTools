@@ -16,3 +16,5 @@ One unique host port per app so they coexist on the LAN. Over Tailscale each con
 | EffectCraft | Adobe After Effects | 8190 | 8080 | `ghcr.io/gerardumbert/effectcraft-web` |
 | SoundCraft | Avid Pro Tools | 8191 | 8080 | `ghcr.io/gerardumbert/soundcraft-web` |
 | CADCraft | AutoCAD | 8192 | 8080 | `ghcr.io/gerardumbert/cadcraft-web` |
+
+All-in-one (`ghcr.io/gerardumbert/artcraft-aio`): host port 8180, container port 8080. Apps at `/<app>/`.

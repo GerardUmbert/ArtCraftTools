@@ -95,5 +95,6 @@
       "title": "CADCraft",
       "category": "Productivity: Tools"
     }
-  ]
+  ],
+  "aio_port": 8180
 }
