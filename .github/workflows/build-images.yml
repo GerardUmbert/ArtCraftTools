@@ -6,7 +6,7 @@ on:
     - cron: "17 4 * * *"   # daily: pick up new upstream releases
   push:
     branches: [main]
-    paths: [Dockerfile, Dockerfile.aio, nginx.conf, nginx-aio.conf, aio/**, icons/**, scripts/**, apps.json, .github/workflows/build-images.yml]
+    paths: [Dockerfile, nginx-main.conf, Dockerfile.aio, nginx.conf, nginx-aio.conf, aio/**, icons/**, scripts/**, apps.json, .github/workflows/build-images.yml]
 
 permissions:
   contents: read

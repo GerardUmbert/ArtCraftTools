@@ -1,6 +1,6 @@
 # All-in-one: every craft app's static web build under /<app>/, plus a landing page.
 # Build context needs ./aio-build/<app>/ for each app (see scripts/fetch-web.sh, DEST=aio-build/<app>).
-FROM nginxinc/nginx-unprivileged:1.28-alpine
+FROM nginx:1.28-alpine
 
 ARG BUILD_DATE=unknown
 LABEL org.opencontainers.image.title="artcraft-aio" \
@@ -8,6 +8,7 @@ LABEL org.opencontainers.image.title="artcraft-aio" \
       org.opencontainers.image.description="All ArtCraft web apps served by nginx under /<app>/" \
       org.opencontainers.image.created="${BUILD_DATE}"
 
+COPY nginx-main.conf /etc/nginx/nginx.conf
 COPY nginx-aio.conf /etc/nginx/conf.d/default.conf
 COPY aio/index.html /usr/share/nginx/html/index.html
 COPY icons/ /usr/share/nginx/html/icons/
@@ -16,3 +17,6 @@ COPY aio-build/ /usr/share/nginx/html/
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
   CMD wget -q -O /dev/null http://127.0.0.1:8080/healthz || exit 1
+
+# daemon off is set in nginx-main.conf (no quoted CMD args: the Unraid Tailscale hook mangles them)
+CMD ["nginx"]
